@@ -91,18 +91,20 @@ export const HomeView = ({ navigation }) => {
             </VStack>
           </VStack>
 
-          <Flex direction='row' flexWrap='wrap' justifyContent='space-between' padding={10} >
-            {!searchText ?
-              <HStack space={2} alignItems="center">
-                <Text>Search for a book to get its summary.</Text>
-              </HStack>
+          <ScrollView>
+            <Flex direction='row' flexWrap='wrap' justifyContent='space-between' padding={10} >
+              {!searchText ?
+                <HStack space={2} alignItems="center">
+                  <Text>Search for a book to get its summary.</Text>
+                </HStack>
 
-              :
-              bookList.map((book) => (
-                <BookContainer book={book} navigation={navigation}/>
-              ))
-            }
-          </Flex>
+                :
+                bookList.map((book) => (
+                  <BookContainer book={book} navigation={navigation} />
+                ))
+              }
+            </Flex>
+          </ScrollView>
           <ToggleDarkMode />
         </VStack>
       </Center>
