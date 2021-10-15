@@ -16,6 +16,7 @@ export const BookContainer = (props) => {
                   scale: isPressed ? 0.96 : 1,
                 },
               ],
+              margin: 10,
             }}
           >
             <HStack alignItems="flex-start">
