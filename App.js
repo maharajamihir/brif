@@ -91,7 +91,7 @@ export const HomeView = ({ navigation }) => {
             </VStack>
           </VStack>
 
-          <ScrollView>
+          <ScrollView style={{height: 300}}>
             <Flex direction='row' flexWrap='wrap' justifyContent='space-between' padding={10} >
               {!searchText ?
                 <HStack space={2} alignItems="center">
@@ -122,7 +122,7 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeView}
-        //options={{ headerShown: false }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen name="Book" component={BookDisplay} />
 
