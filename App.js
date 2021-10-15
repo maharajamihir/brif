@@ -56,6 +56,7 @@ function SearchBar() {
           _web={{
             _focus: { style: { boxShadow: 'none' } },
           }}
+          color="black"
           InputLeftElement={
             <Icon
               ml="2"
