@@ -11,4 +11,8 @@
 
 
 - blinkist only has 4500 titles, but over 18 million users (that are paying 13 euros per month each!!)
+<<<<<<< HEAD
 - our technology is essentially scalable til infinity
+=======
+- our technology is essentially scalable til infinity
+>>>>>>> 74ee431739e339e6b601cbd8b90149c1c58529ef
