@@ -21,6 +21,7 @@ import NativeBaseIcon from "./components/NativeBaseIcon";
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { BookContainer } from './components/BookContainer';
+import { bookList } from './model/bookData';
 
 // Define the config
 const config = {
@@ -58,6 +59,7 @@ export default function App() {
             <VStack width="100%" space={5} alignItems="center">
               <Input
                 placeholder="Search"
+                color='black'
                 variant="filled"
                 width="100%"
                 bg="gray.100"
@@ -88,8 +90,9 @@ export default function App() {
               <Text>Search for a book to get its summary.</Text>
             </HStack>
             :
-
-            <BookContainer author='Franz' title='The Game of Life' />
+           bookList.map((book) => (
+             <BookContainer author={book.author} title={book.title} year={book.year}/>
+           ))
           }
           <ToggleDarkMode />
         </VStack>

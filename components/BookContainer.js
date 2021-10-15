@@ -24,7 +24,8 @@ export const BookContainer = (props) => {
               </Text>
               <Spacer />
               <Text fontSize={10} color="cyan.100">
-                added 1 month ago
+                {/*added 1 month ago*/}
+                {props.year}
               </Text>
             </HStack>
             <Text color="cyan.50" mt="3" fontWeight="medium" fontSize={20}>
