@@ -16,6 +16,8 @@ import {
   extendTheme,
   VStack,
   Code,
+  Flex,
+  Spacer,
 } from "native-base";
 import NativeBaseIcon from "./components/NativeBaseIcon";
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
@@ -43,7 +45,7 @@ export default function App() {
         px={4}
         flex={1}
       >
-        <VStack space={5} alignItems="center">
+        <VStack space={5} alignItems="center" width='80%'>
           <NativeBaseIcon />
           <Heading size="lg">Welcome to brif</Heading>
 
@@ -85,15 +87,19 @@ export default function App() {
             </VStack>
           </VStack>
 
-          {!searchText ?
-            <HStack space={2} alignItems="center">
-              <Text>Search for a book to get its summary.</Text>
-            </HStack>
-            :
-           bookList.map((book) => (
-             <BookContainer author={book.author} title={book.title} year={book.year}/>
-           ))
-          }
+          <Flex direction='row' flexWrap='wrap' justifyContent='space-between' padding={10} >
+            {!searchText ?
+              <HStack space={2} alignItems="center">
+                <Text>Search for a book to get its summary.</Text>
+              </HStack>
+
+              :
+              bookList.map((book) => (
+                <BookContainer author={book.author} title={book.title} year={book.year} />
+              ))
+
+            }
+          </Flex>
           <ToggleDarkMode />
         </VStack>
       </Center>
