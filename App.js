@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from 'react-native';
+import { TouchableOpacity, View, Button } from 'react-native';
 import {
   Box,
   Divider,
@@ -17,13 +17,17 @@ import {
   VStack,
   Code,
   Flex,
+  ScrollView,
   Spacer,
+  Pressable,
 } from "native-base";
 import NativeBaseIcon from "./components/NativeBaseIcon";
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { BookContainer } from './components/BookContainer';
 import { bookList } from './model/bookData';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { BookDisplay } from './components/BookDisplay'
+import { NavigationContainer } from "@react-navigation/native";
 
 // Define the config
 const config = {
@@ -34,7 +38,7 @@ const config = {
 // extend the theme
 export const theme = extendTheme({ config });
 
-export default function App() {
+export const HomeView = ({ navigation }) => {
   const [searchText, setSearchText] = useState(null);
 
   return (
@@ -95,9 +99,8 @@ export default function App() {
 
               :
               bookList.map((book) => (
-                <BookContainer author={book.author} title={book.title} year={book.year} />
+                <BookContainer book={book} navigation={navigation}/>
               ))
-
             }
           </Flex>
           <ToggleDarkMode />
@@ -105,7 +108,71 @@ export default function App() {
       </Center>
     </NativeBaseProvider>
   );
+
 }
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator >
+        <Stack.Screen
+          name="Home"
+          component={HomeView}
+        //options={{ headerShown: false }}
+        />
+        <Stack.Screen name="Book" component={BookDisplay} />
+
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
+
+
+export const BookContainer = (props) => {
+  const navigation = props.navigation;
+  const book = props.book;
+  return (
+    <Pressable onPress={() => navigation.navigate('Book', book)}>
+      {({ isHovered, isFocused, isPressed }) => {
+        return (
+          <Box
+            bg={isPressed ? "cyan.900" : isHovered ? "cyan.800" : "cyan.700"}
+            p="5"
+            rounded="8"
+            w="200"
+            style={{
+              transform: [
+                {
+                  scale: isPressed ? 0.96 : 1,
+                },
+              ],
+            }}
+          >
+            <HStack alignItems="flex-start">
+              <Text fontSize={12} color="cyan.50" fontWeight="medium">
+                {book.author}
+              </Text>
+              <Spacer />
+              <Text fontSize={10} color="cyan.100">
+                {/*added 1 month ago*/}
+                {book.year}
+              </Text>
+            </HStack>
+            <Text color="cyan.50" mt="3" fontWeight="medium" fontSize={20}>
+              {book.title}
+            </Text>
+            <Text mt="2" fontSize={14} color="cyan.100">
+              Unlock powerfull time-saving tools for creating email delivery and
+              collecting marketing data
+            </Text>
+          </Box>
+        )
+      }}
+    </Pressable>
+  );
+};
 
 // Color Switch Component
 function ToggleDarkMode() {
