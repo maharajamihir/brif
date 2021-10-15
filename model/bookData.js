@@ -20,6 +20,11 @@ export const bookList = [
     year: 2020
   },
   {
+    title: 'Downwards',
+    author: 'Mihir Mahajan',
+    year: 2020
+  },
+  {
     title: 'The Game of Life',
     author: 'Franz Srambical',
     year: 2021
