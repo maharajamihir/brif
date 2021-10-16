@@ -49,10 +49,13 @@ export const HomeView = ({ navigation }) => {
         px={4}
         flex={1}
       >
-        <VStack space={5} alignItems="center" width='80%'>
-          <NativeBaseIcon />
+        <VStack space={5} alignItems='flex-end' width='80%'>
+          <View style={{top: 20, right: 5}}>
+            <ToggleDarkMode />
+          </View>
+          <View style={{alignItems: 'center'}}>
+          {searchText ? null : <NativeBaseIcon/>}
           <Heading size="lg">Welcome to brif</Heading>
-
           {/* Search */}
           <VStack
             space={5}
@@ -91,7 +94,7 @@ export const HomeView = ({ navigation }) => {
             </VStack>
           </VStack>
 
-          <ScrollView style={{height: 300}}>
+          
             <Flex direction='row' flexWrap='wrap' justifyContent='space-between' padding={10} >
               {!searchText ?
                 <HStack space={2} alignItems="center">
@@ -99,13 +102,14 @@ export const HomeView = ({ navigation }) => {
                 </HStack>
 
                 :
-                bookList.map((book) => (
+                <ScrollView style={{height: 500}}>
+                {bookList.map((book) => (
                   <BookContainer book={book} navigation={navigation} />
-                ))
+                ))}
+                </ScrollView>
               }
             </Flex>
-          </ScrollView>
-          <ToggleDarkMode />
+          </View>
         </VStack>
       </Center>
     </NativeBaseProvider>

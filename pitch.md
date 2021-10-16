@@ -6,7 +6,7 @@
 
 - Blinkist only has 4500 titles. but over 18 million users (paying 13 euros per month each!!) WHY??
 
-- Employees take at least week to read, analize and summarize books
+- Employees take at least week to read, analyze and summarize books
 
 ## Our Solution
 
