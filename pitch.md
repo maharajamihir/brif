@@ -1,6 +1,6 @@
 # brif.
 
-# Status-quo
+## Status-quo
 
 - Summarizers: Blinkist, Soundview, GetAbstract
 
@@ -8,7 +8,7 @@
 
 - Employees take at least week to read, analize and summarize books
 
-# Our Solution
+## Our Solution
 
 - AI based app to summarize books
 - PITCH HERE
@@ -18,7 +18,7 @@
 - Summaries of your favourite books basically for free! 
 - But thats just the beginning, business plan is the real game changer
 
-# Business Plan
+## Business Plan
 -  we're going to start with a basic, ever expanding database of book summaries (which will surpass blinkists repertoire in a week!)
 - users are able to rate the summaries on a scale from 1 to 10
 - rating is used to make the AI even better via reinforcement learning with human input
