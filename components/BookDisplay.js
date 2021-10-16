@@ -3,13 +3,13 @@ import { Heading, NativeBaseProvider, Center, Text } from 'native-base';
 
 export const BookDisplay = ({ route, navigation }) => {
 
-  const { name, sum} = route.params;
+  const { book } = route.params;
   return (
     <NativeBaseProvider>
       <Center >
-        <Heading>{name}</Heading>
+        <Heading>{book.name}</Heading>
         <Text>
-         {sum} 
+         {book.sum} 
        </Text>
       </Center>
     </NativeBaseProvider>

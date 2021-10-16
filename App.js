@@ -124,12 +124,13 @@ export const HomeView = ({ navigation }) => {
                   <Text>Search for a book to get its summary.</Text>
                 </HStack>
                 :
-                bookList ? <ScrollView style={{height: 500}}>
+                !bookList ?  
+                <Text>Loading...</Text> : 
+                <ScrollView style={{height: 500}}>
                 {bookList.map((book) => (
                   <BookContainer book={book} navigation={navigation} />
                 ))}
-                </ScrollView> : 
-                <Text>Loading...</Text>
+                </ScrollView> 
               }
             </Flex>
           </View>
@@ -163,7 +164,7 @@ export const BookContainer = (props) => {
   const navigation = props.navigation;
   const book = props.book;
   return (
-    <Pressable onPress={() => navigation.navigate('Book', book)}>
+    <Pressable onPress={() => navigation.navigate('Book', {book: book})}>
       {({ isHovered, isFocused, isPressed }) => {
         return (
           <Box
