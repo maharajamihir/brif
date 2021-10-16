@@ -39,7 +39,27 @@ const config = {
 export const theme = extendTheme({ config });
 
 export const HomeView = ({ navigation }) => {
-  const [searchText, setSearchText] = useState(null);
+  const [searchText, setSearchText] = useState("");
+  const [bookList, setBookList] = useState(null);
+
+  const fetchData = (text) => {
+    const url = 'https://brif-backend.herokuapp.com/get-sum'
+    //const url  = 'http://localhost:5000/get-sum'
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify({
+        title: text
+      })
+    }).then(response => response.json())
+      .then(data => setBookList(data))
+      .then(books => console.log("Received data for Book List: " + JSON.stringify(bookList[0])))
+      .catch(error => console.log(error))
+      .then(l => { return l });
+  }
 
   return (
     <NativeBaseProvider>
@@ -81,7 +101,10 @@ export const HomeView = ({ navigation }) => {
                 _web={{
                   _focus: { style: { boxShadow: 'none' } },
                 }}
-                onChangeText={setSearchText}
+                onChangeText={(text) => {
+                  setSearchText(text);
+                fetchData(text);
+                }}
                 InputLeftElement={
                   <Icon
                     ml="2"
@@ -100,13 +123,13 @@ export const HomeView = ({ navigation }) => {
                 <HStack space={2} alignItems="center">
                   <Text>Search for a book to get its summary.</Text>
                 </HStack>
-
                 :
-                <ScrollView style={{height: 500}}>
+                bookList ? <ScrollView style={{height: 500}}>
                 {bookList.map((book) => (
                   <BookContainer book={book} navigation={navigation} />
                 ))}
-                </ScrollView>
+                </ScrollView> : 
+                <Text>Loading...</Text>
               }
             </Flex>
           </View>
@@ -159,7 +182,7 @@ export const BookContainer = (props) => {
           >
             <HStack alignItems="flex-start">
               <Text fontSize={12} color="cyan.50" fontWeight="medium">
-                {book.author}
+                {book.name}
               </Text>
               <Spacer />
               <Text fontSize={10} color="cyan.100">
@@ -168,7 +191,7 @@ export const BookContainer = (props) => {
               </Text>
             </HStack>
             <Text color="cyan.50" mt="3" fontWeight="medium" fontSize={20}>
-              {book.title}
+              {book.name}
             </Text>
             <Text mt="2" fontSize={14} color="cyan.100">
               Unlock powerfull time-saving tools for creating email delivery and
