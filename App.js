@@ -71,7 +71,6 @@ export const HomeView = ({ navigation }) => {
       >
         <VStack space={5} alignItems='center' width='100%' flex={1}>
           <View style={{top: 20, right: 5}}>
-            <ToggleDarkMode />
           </View>
           <View style={styles.container}>
           {searchText ? null : <NativeBaseIcon/>}
