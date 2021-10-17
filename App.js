@@ -69,7 +69,7 @@ export const HomeView = ({ navigation }) => {
         px={4}
         flex={1}
       >
-        <VStack space={5} alignItems='flex-end' width='80%'>
+        <VStack space={5} alignItems='center' width='80%'>
           <View style={{top: 20, right: 5}}>
             <ToggleDarkMode />
           </View>
@@ -103,7 +103,7 @@ export const HomeView = ({ navigation }) => {
                 }}
                 onChangeText={(text) => {
                   setSearchText(text);
-                fetchData(text);
+                  fetchData(text);
                 }}
                 InputLeftElement={
                   <Icon
@@ -126,7 +126,7 @@ export const HomeView = ({ navigation }) => {
                 :
                 !bookList ?  
                 <Text>Loading...</Text> : 
-                <ScrollView style={{height: 500}}>
+                <ScrollView style={{height: "80%", width: "80%"}}>
                 {bookList.map((book) => (
                   <BookContainer book={book} navigation={navigation} />
                 ))}
