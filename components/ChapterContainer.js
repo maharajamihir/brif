@@ -33,9 +33,9 @@ export const ChapterContainer = ({ route, navigation }) => {
       <NativeBaseProvider>
         <View>
             <Center
-            _dark={{ bg: "blueGray.900" }}
-            _light={{ bg: "blueGray.50" }}
-            px={4}
+            //_dark={{ bg: "blueGray.900" }}
+            //_light={{ bg: "blueGray.50" }}
+            p={10}
             flex={1}
             >
                 <VStack space={5} alignItems='center' width='100%' flex={1}>

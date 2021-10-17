@@ -27,6 +27,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BookDisplay } from './components/BookDisplay'
 import { NavigationContainer } from "@react-navigation/native";
 import { ChapterContainer } from "./components/ChapterContainer";
+import { backgroundColor } from "styled-system";
 
 // Define the config
 export const config = {
@@ -64,8 +65,8 @@ export const HomeView = ({ navigation }) => {
     <NativeBaseProvider>
     <View>
       <Center
-        _dark={{ bg: "blueGray.900" }}
-        _light={{ bg: "blueGray.50" }}
+        //_dark={{ bg: "blueGray.900" }}
+        //_light={{ bg: "blueGray.50" }}
         px={4}
         flex={1}
       >
@@ -78,6 +79,7 @@ export const HomeView = ({ navigation }) => {
           {/* Search */}
           <VStack
             space={5}
+            p={5}
             width="100%"
             divider={
               <Box px="2">
@@ -95,8 +97,9 @@ export const HomeView = ({ navigation }) => {
                 py="1"
                 px="2"
                 placeholderTextColor="gray.500"
-                _hover={{ bg: 'gray.200', borderWidth: 0 }}
-                borderWidth="0"
+                _hover={{ bg: 'gray.200', borderWidth: 1 }}
+                borderWidth="1"
+                borderColor="#000"
                 _web={{
                   _focus: { style: { boxShadow: 'none' } },
                 }}
@@ -117,7 +120,7 @@ export const HomeView = ({ navigation }) => {
           </VStack>
 
           
-            <Flex direction='row' flexWrap='wrap' justifyContent='space-between' padding={10} >
+            <Flex direction='row' flexWrap='wrap' justifyContent='space-between' px={20} >
               {!searchText ?
                 <HStack space={2} alignItems="center">
                   <Text>Search for a book to get its summary.</Text>
@@ -231,7 +234,7 @@ const styles = StyleSheet.create({
   {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   box: {
     marginHorizontal: 20,

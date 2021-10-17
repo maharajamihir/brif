@@ -7,9 +7,9 @@ export const BookDisplay = ({ route, navigation }) => {
   return (
     <NativeBaseProvider>
        <Center
-            _dark={{ bg: "blueGray.900" }}
-            _light={{ bg: "blueGray.50" }}
-            px={4}
+            //_dark={{ bg: "blueGray.900" }}
+            //_light={{ bg: "blueGray.50" }}
+            px={10}
             //flex={1}
             >
         <Heading>{book.name}</Heading>
