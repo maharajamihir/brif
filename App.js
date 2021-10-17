@@ -69,6 +69,7 @@ export const HomeView = ({ navigation }) => {
         //_light={{ bg: "blueGray.50" }}
         px={4}
         flex={1}
+        pt={20}
       >
         <VStack space={5} alignItems='center' width='100%' flex={1}>
           <View style={{top: 20, right: 5}}>
@@ -97,11 +98,11 @@ export const HomeView = ({ navigation }) => {
                 py="1"
                 px="2"
                 placeholderTextColor="gray.500"
-                _hover={{ bg: 'gray.200', borderWidth: 1 }}
+                _hover={{ bg: 'white', borderWidth: 1 }}
                 borderWidth="1"
                 borderColor="#000"
                 _web={{
-                  _focus: { style: { boxShadow: 'none' } },
+                  _focus: { style: { boxShadow: 'none' }, bg: 'gray.200' },
                 }}
                 onChangeText={(text) => {
                   setSearchText(text);
