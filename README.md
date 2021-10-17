@@ -6,7 +6,7 @@ A mobile/web platform that uses AI to deliver summaries of your favourite books 
 Our Business plan can be viewed [here](./BusinessPlan.md)
 
 ## Pitch
-Our pitch for the makeathlon can be viewed [here](./pitch.md)
+Our pitch for the makeathlon can be viewed [here](./pitch.md) or the slides [here](./presentation.pdf)
 
 ## Preview
 
