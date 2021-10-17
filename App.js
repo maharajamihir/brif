@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TouchableOpacity, View, Button } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import {
   Box,
   Divider,
@@ -23,14 +23,13 @@ import {
 } from "native-base";
 import NativeBaseIcon from "./components/NativeBaseIcon";
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { bookList } from './model/bookData';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BookDisplay } from './components/BookDisplay'
 import { NavigationContainer } from "@react-navigation/native";
+import { ChapterContainer } from "./components/ChapterContainer";
 
 // Define the config
-const config = {
+export const config = {
   useSystemColorMode: false,
   initialColorMode: "dark",
 };
@@ -63,17 +62,18 @@ export const HomeView = ({ navigation }) => {
 
   return (
     <NativeBaseProvider>
+    <View>
       <Center
         _dark={{ bg: "blueGray.900" }}
         _light={{ bg: "blueGray.50" }}
         px={4}
         flex={1}
       >
-        <VStack space={5} alignItems='flex-end' width='80%'>
+        <VStack space={5} alignItems='center' width='100%' flex={1}>
           <View style={{top: 20, right: 5}}>
             <ToggleDarkMode />
           </View>
-          <View style={{alignItems: 'center'}}>
+          <View style={styles.container}>
           {searchText ? null : <NativeBaseIcon/>}
           <Heading size="lg">Welcome to brif</Heading>
           {/* Search */}
@@ -103,7 +103,7 @@ export const HomeView = ({ navigation }) => {
                 }}
                 onChangeText={(text) => {
                   setSearchText(text);
-                fetchData(text);
+                  fetchData(text);
                 }}
                 InputLeftElement={
                   <Icon
@@ -124,17 +124,21 @@ export const HomeView = ({ navigation }) => {
                   <Text>Search for a book to get its summary.</Text>
                 </HStack>
                 :
-                bookList ? <ScrollView style={{height: 500}}>
+                !bookList ?  
+                <Text>Loading...</Text> : 
+                <ScrollView style={{flexWrap: 'wrap', flex: 2}}>
+                <View style={styles.buttonContainer}>
                 {bookList.map((book) => (
                   <BookContainer book={book} navigation={navigation} />
                 ))}
-                </ScrollView> : 
-                <Text>Loading...</Text>
+                </View>
+                </ScrollView> 
               }
             </Flex>
           </View>
         </VStack>
       </Center>
+      </View>
     </NativeBaseProvider>
   );
 
@@ -152,7 +156,7 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="Book" component={BookDisplay} />
-
+        <Stack.Screen name="Chapters" component={ChapterContainer}/>
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -162,8 +166,9 @@ export default function App() {
 export const BookContainer = (props) => {
   const navigation = props.navigation;
   const book = props.book;
+  const navigateTo = book.chaps ? 'Chapters' : 'Book';
   return (
-    <Pressable onPress={() => navigation.navigate('Book', book)}>
+    <Pressable onPress={() => navigation.navigate(navigateTo, {book: book})}>
       {({ isHovered, isFocused, isPressed }) => {
         return (
           <Box
@@ -194,8 +199,7 @@ export const BookContainer = (props) => {
               {book.name}
             </Text>
             <Text mt="2" fontSize={14} color="cyan.100">
-              Unlock powerfull time-saving tools for creating email delivery and
-              collecting marketing data
+            {book.chaps ? "Chapterwise summary of " : "Summary of "}{book.name}!
             </Text>
           </Box>
         )
@@ -221,3 +225,34 @@ function ToggleDarkMode() {
     </HStack>
   );
 }
+
+
+const styles = StyleSheet.create({
+  container:
+  {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  box: {
+    marginHorizontal: 20,
+    marginVertical: 5,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 10,
+    color: 'teal',
+  },
+  input: {
+    height: 50,
+    width: 300,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  buttonContainer:{
+    flex:1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingTop: 10
+  },
+});
