@@ -26,9 +26,10 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BookDisplay } from './components/BookDisplay'
 import { NavigationContainer } from "@react-navigation/native";
+import { ChapterContainer } from "./components/ChapterContainer";
 
 // Define the config
-const config = {
+export const config = {
   useSystemColorMode: false,
   initialColorMode: "dark",
 };
@@ -155,7 +156,7 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="Book" component={BookDisplay} />
-
+        <Stack.Screen name="Chapters" component={ChapterContainer}/>
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -165,8 +166,9 @@ export default function App() {
 export const BookContainer = (props) => {
   const navigation = props.navigation;
   const book = props.book;
+  const navigateTo = book.chaps ? 'Chapters' : 'Book';
   return (
-    <Pressable onPress={() => navigation.navigate('Book', {book: book})}>
+    <Pressable onPress={() => navigation.navigate(navigateTo, {book: book})}>
       {({ isHovered, isFocused, isPressed }) => {
         return (
           <Box
@@ -197,8 +199,7 @@ export const BookContainer = (props) => {
               {book.name}
             </Text>
             <Text mt="2" fontSize={14} color="cyan.100">
-              Unlock powerfull time-saving tools for creating email delivery and
-              collecting marketing data
+            {book.chaps ? "Chapterwise summary of " : "Summary of "}{book.name}!
             </Text>
           </Box>
         )

@@ -6,7 +6,12 @@ export const BookDisplay = ({ route, navigation }) => {
   const { book } = route.params;
   return (
     <NativeBaseProvider>
-      <Center >
+       <Center
+            _dark={{ bg: "blueGray.900" }}
+            _light={{ bg: "blueGray.50" }}
+            px={4}
+            //flex={1}
+            >
         <Heading>{book.name}</Heading>
         <Text>
          {book.sum} 
