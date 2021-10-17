@@ -21,10 +21,10 @@ Our pitch for the makeathlon can be viewed [here](./pitch.md) or the slides [her
 
 ## Usage
 1. Clone this repo
-2. run
-´´´console
+2. run 
+```console
 npm install
-´´´
+```
 3. run 
 ```console
 expo start 
