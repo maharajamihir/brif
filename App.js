@@ -68,7 +68,7 @@ export const HomeView = ({ navigation }) => {
         px={4}
         flex={1}
       >
-        <VStack space={5} alignItems='center' width='100%'>
+        <VStack space={5} alignItems='center' width='100%' flex={1}>
           <View style={{top: 20, right: 5}}>
             <ToggleDarkMode />
           </View>
