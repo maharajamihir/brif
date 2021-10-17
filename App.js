@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TouchableOpacity, View, Button } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import {
   Box,
   Divider,
@@ -23,8 +23,6 @@ import {
 } from "native-base";
 import NativeBaseIcon from "./components/NativeBaseIcon";
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { bookList } from './model/bookData';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BookDisplay } from './components/BookDisplay'
 import { NavigationContainer } from "@react-navigation/native";
@@ -63,17 +61,18 @@ export const HomeView = ({ navigation }) => {
 
   return (
     <NativeBaseProvider>
+    <View>
       <Center
         _dark={{ bg: "blueGray.900" }}
         _light={{ bg: "blueGray.50" }}
         px={4}
         flex={1}
       >
-        <VStack space={5} alignItems='center' width='80%'>
+        <VStack space={5} alignItems='center' width='100%'>
           <View style={{top: 20, right: 5}}>
             <ToggleDarkMode />
           </View>
-          <View style={{alignItems: 'center'}}>
+          <View style={styles.container}>
           {searchText ? null : <NativeBaseIcon/>}
           <Heading size="lg">Welcome to brif</Heading>
           {/* Search */}
@@ -126,16 +125,19 @@ export const HomeView = ({ navigation }) => {
                 :
                 !bookList ?  
                 <Text>Loading...</Text> : 
-                <ScrollView style={{height: "80%", width: "80%"}}>
+                <ScrollView style={{flexWrap: 'wrap', flex: 2}}>
+                <View style={styles.buttonContainer}>
                 {bookList.map((book) => (
                   <BookContainer book={book} navigation={navigation} />
                 ))}
+                </View>
                 </ScrollView> 
               }
             </Flex>
           </View>
         </VStack>
       </Center>
+      </View>
     </NativeBaseProvider>
   );
 
@@ -222,3 +224,34 @@ function ToggleDarkMode() {
     </HStack>
   );
 }
+
+
+const styles = StyleSheet.create({
+  container:
+  {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  box: {
+    marginHorizontal: 20,
+    marginVertical: 5,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 10,
+    color: 'teal',
+  },
+  input: {
+    height: 50,
+    width: 300,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  buttonContainer:{
+    flex:1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingTop: 10
+  },
+});
