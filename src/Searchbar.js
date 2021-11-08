@@ -79,7 +79,6 @@ export default function ControllableStates() {
         sx={{ width: 1000 }}
         renderInput={(params) => <TextField {...params} label="Books" />}
                  /> : <p>loading...</p>}
-      <VirtualizedList/>
     </div>
   );
 }
