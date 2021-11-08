@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState} from 'react';
+import React, { useEffect,   useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
@@ -6,8 +6,35 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { FixedSizeList } from 'react-window';
+import { makeStyles } from "@material-ui/core/styles";
 
-
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiInputLabel-outlined:not(.MuiInputLabel-shrink)": {
+      // Default transform is "translate(14px, 20px) scale(1)""
+      // This lines up the label with the initial cursor position in the input
+      // after changing its padding-left.
+     // transform: "translate(34px, 20px) scale(1);"
+    }
+  },
+  inputRoot: {
+    color: "white",
+    // This matches the specificity of the default styles at https://github.com/mui-org/material-ui/blob/v4.11.3/packages/material-ui-lab/src/Autocomplete/Autocomplete.js#L90
+    '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child': {
+      // Default left padding is 6px
+      paddingLeft: 26
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderColor: "white"
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      borderColor: "white"
+    },
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "white"
+    },
+  }
+}));
 
 export default function ControllableStates() {
   const [value, setValue] = React.useState("");
@@ -15,6 +42,7 @@ export default function ControllableStates() {
   const [bookList, setBookList] = useState(null);
   const [options, setOptions] = useState(null);
 
+  const classes = useStyles();
   const fetchData = (text) => {
     const url = 'https://brif-backend.herokuapp.com/get-sum'
     fetch(url, {
@@ -64,8 +92,10 @@ export default function ControllableStates() {
      //   <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
      // <div>{`inputValue: '${inputValue}'`}</div>
       }<br />
-     { options ? <Autocomplete
+     { options ?
+       <Autocomplete
         value={value}
+        classes={classes}
         onChange={(event, newValue) => {
           setValue(newValue);
           fetchData(newValue);
@@ -76,7 +106,7 @@ export default function ControllableStates() {
         }}
         id="controllable-states-demo"
         options={options}
-        sx={{ width: 1000 }}
+         sx={{color: '#fff', width: 1000 }}
         renderInput={(params) => <TextField {...params} label="Books" />}
                  /> : <p>loading...</p>}
     </div>
