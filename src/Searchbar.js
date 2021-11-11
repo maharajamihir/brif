@@ -1,8 +1,12 @@
 import React, { useEffect,   useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import Grid from '@mui/material/Grid';
 import { makeStyles } from "@material-ui/core/styles";
-import CustomizedAccordions from './Summary'
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import { createTheme, ThemeProvider, styled} from '@mui/material/styles';
+
 
 
 const url = 'https://brif-backend.herokuapp.com/';
@@ -56,7 +60,7 @@ export default function ControllableStates() {
       })
     }).then(response => response.json())
       .then(data => setBookList(data))
-      .then(books => console.log("Received data for Book List: " + JSON.stringify(bookList[0])))
+      .then(books => console.log("Received data for Book List: " + text))
       .catch(error => console.log(error))
       .then(l => { return l });
   }
@@ -68,14 +72,15 @@ export default function ControllableStates() {
       .then(response => response.json())
      // .then(res => console.log(JSON.stringify(res[0])))
       .then(list => setOptions(list))
-      .then(res => console.log(JSON.stringify(res[0])))
+      .then(res => console.log(JSON.stringify(options[0])))
       .catch(error => console.log(error))
       .then(l => { return l });
 
   }
 
   useEffect(() => {
-   getBookNames();
+    if(!options)
+      getBookNames();
   });
 
   return (
@@ -98,10 +103,83 @@ export default function ControllableStates() {
         }}
         id="controllable-states-demo"
         options={options}
-         sx={{color: '#fff', width: '80%' }}
+         sx={{color: '#fff', width: 1000 }}
         renderInput={(params) => <TextField {...params} label="Books" />}
                  /> : <p>loading...</p>}
-      <CustomizedAccordions/>
+
+      {bookList ?
+       <Summary book={bookList}/> :
+       null
+      }
+      {options ?
+        <Featured availableBooks={options}/>
+       : null}
+
+    </div>
+  );
+}
+
+const SummaryItem = styled(Paper)(({ theme }) => ({
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  lineHeight: '60px',
+}));
+
+
+const Summary = (book) => {
+  return(
+    <div onClick={() => console.log(book.book.name)}>
+        <Box
+          sx={{
+            p: 2,
+            bgcolor: 'background.default',
+            display: 'grid',
+            gridTemplateColumns: { md: '1fr' },
+            gap: 2,
+          }}
+        >
+            <SummaryItem key={1} elevation={24}>
+              <h2>{//TODO make the Item here
+                book.book.name
+                  }</h2>
+    <img src={"https://cdna.artstation.com/p/assets/covers/images/025/969/272/large/johann-dakitsch-alice-in-wonderlandfinal-front-cover.jpg?1587488581"} alt="cover" style={{width: "10%"}}/>
+            </SummaryItem>
+        </Box>
+  </div>
+  );
+}
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  height: 60,
+  lineHeight: '60px',
+}));
+
+const lightTheme = createTheme({ palette: { mode: 'light' } });
+
+const Featured = (props) => {
+  return (
+    <div>
+    <h2>Featured Summaries</h2>
+          <ThemeProvider theme={lightTheme}>
+            <Box
+              sx={{
+                p: 2,
+                bgcolor: 'background.default',
+                display: 'grid',
+                gridTemplateColumns: { md: '1fr 1fr 1fr' },
+                gap: 2,
+              }}
+            >
+              {props.availableBooks.map((elevation) => (
+                <Item key={elevation} elevation={24}>
+                  {elevation}
+                </Item>
+              ))}
+            </Box>
+          </ThemeProvider>
     </div>
   );
 }
