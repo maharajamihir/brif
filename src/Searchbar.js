@@ -1,12 +1,10 @@
 import React, { useEffect,   useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import Box from '@mui/material/Box';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import { FixedSizeList } from 'react-window';
 import { makeStyles } from "@material-ui/core/styles";
+
+const url = 'https://brif-backend.herokuapp.com/';
+//const url = 'http://localhost:5000/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,20 +16,20 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   inputRoot: {
-    color: "white",
+    color: '#0b2a5c',
     // This matches the specificity of the default styles at https://github.com/mui-org/material-ui/blob/v4.11.3/packages/material-ui-lab/src/Autocomplete/Autocomplete.js#L90
     '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child': {
       // Default left padding is 6px
       paddingLeft: 26
     },
     "& .MuiOutlinedInput-notchedOutline": {
-      borderColor: "white"
+      borderColor: '#0b2a5c'
     },
     "&:hover .MuiOutlinedInput-notchedOutline": {
-      borderColor: "white"
+      borderColor:  '#0b2a5c'
     },
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: "white"
+      borderColor:  '#0b2a5c'
     },
   }
 }));
@@ -44,8 +42,8 @@ export default function ControllableStates() {
 
   const classes = useStyles();
   const fetchData = (text) => {
-    const url = 'https://brif-backend.herokuapp.com/get-sum'
-    fetch(url, {
+    const endpoint = url + 'get-sum';
+    fetch(endpoint, {
       method: 'POST',
       headers: {
         Accept: 'application/json, text/plain, */*',
@@ -62,19 +60,11 @@ export default function ControllableStates() {
   }
 
   const getBookNames = () => {
-    const url = 'https://brif-backend.herokuapp.com/get-sum'
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-      body: JSON.stringify({
-        title: ""
-      })
-    }).then(response => response.json())
-      .then(data => data.map(item => item.name))
-      //.then(res => console.log(JSON.stringify(res[0])))
+    //const url = 'https://brif-backend.herokuapp.com/get-sum'
+    const endpoint = url + 'get-sum-names'
+    fetch(endpoint)
+      .then(response => response.json())
+     // .then(res => console.log(JSON.stringify(res[0])))
       .then(list => setOptions(list))
       .then(res => console.log(JSON.stringify(res[0])))
       .catch(error => console.log(error))
@@ -110,35 +100,5 @@ export default function ControllableStates() {
         renderInput={(params) => <TextField {...params} label="Books" />}
                  /> : <p>loading...</p>}
     </div>
-  );
-}
-
-function renderRow(props) {
-  const { index, style } = props;
-
-  return (
-    <ListItem style={style} key={index} component="div" disablePadding>
-      <ListItemButton>
-    <ListItemText primary={`Item ${index + 1}`} style={{color: '#000'}} />
-      </ListItemButton>
-    </ListItem>
-  );
-}
-
-function VirtualizedList() {
-  return (
-    <Box
-      sx={{ width: '100%', height: 400, maxWidth: 1000, bgcolor: 'background.paper' }}
-    >
-      <FixedSizeList
-        height={400}
-        width={1000}
-        itemSize={46}
-        itemCount={200}
-        overscanCount={5}
-      >
-        {renderRow}
-      </FixedSizeList>
-    </Box>
   );
 }
