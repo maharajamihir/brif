@@ -8,7 +8,9 @@ function App() {
     <div
       className="App">
       <header className="App-header">
-        <h1>brif.</h1>
+        <div>
+          <h1>brif.</h1>
+        </div>
         <ControllableStates />
       </header>
     </div>

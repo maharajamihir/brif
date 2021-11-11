@@ -83,7 +83,7 @@ export default function ControllableStates() {
   });
 
   return (
-    <div style={{alignItems: 'center'}}>
+    <div style={{alignItems: 'center', justifyContent: 'center'}}>
       {
      //   <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
      // <div>{`inputValue: '${inputValue}'`}</div>
@@ -102,7 +102,7 @@ export default function ControllableStates() {
         }}
         id="controllable-states-demo"
         options={options}
-         sx={{color: '#fff' }}
+         sx={{color: '#fff'}}
         renderInput={(params) => <TextField {...params} label="Books" />}
                  /> : <p>loading...</p>}
 
@@ -142,7 +142,8 @@ const Summary = (book) => {
               <h2>{//TODO make the Item here
                 book.book.name
                   }</h2>
-    <img src={"https://cdna.artstation.com/p/assets/covers/images/025/969/272/large/johann-dakitsch-alice-in-wonderlandfinal-front-cover.jpg?1587488581"} alt="cover" style={{width: "10%"}}/>
+              <img src={book.book.img} alt="cover" style={{width: "10%"}}/>
+              <p>Click to read the summary!</p>
             </SummaryItem>
         </Box>
   </div>
