@@ -2,6 +2,8 @@ import React, { useEffect,   useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { makeStyles } from "@material-ui/core/styles";
+import CustomizedAccordions from './Summary'
+
 
 const url = 'https://brif-backend.herokuapp.com/';
 //const url = 'http://localhost:5000/';
@@ -96,9 +98,10 @@ export default function ControllableStates() {
         }}
         id="controllable-states-demo"
         options={options}
-         sx={{color: '#fff', width: 1000 }}
+         sx={{color: '#fff', width: '80%' }}
         renderInput={(params) => <TextField {...params} label="Books" />}
                  /> : <p>loading...</p>}
+      <CustomizedAccordions/>
     </div>
   );
 }
