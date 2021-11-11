@@ -83,7 +83,7 @@ export default function ControllableStates() {
   });
 
   return (
-    <div>
+    <div style={{alignItems: 'center'}}>
       {
      //   <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
      // <div>{`inputValue: '${inputValue}'`}</div>
@@ -102,7 +102,7 @@ export default function ControllableStates() {
         }}
         id="controllable-states-demo"
         options={options}
-         sx={{color: '#fff', width: 1000 }}
+         sx={{color: '#fff' }}
         renderInput={(params) => <TextField {...params} label="Books" />}
                  /> : <p>loading...</p>}
 
@@ -119,6 +119,7 @@ export default function ControllableStates() {
 }
 
 const SummaryItem = styled(Paper)(({ theme }) => ({
+  width: '100%',
   textAlign: 'center',
   color: theme.palette.text.secondary,
   lineHeight: '60px',
@@ -152,7 +153,6 @@ const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   textAlign: 'center',
   color: theme.palette.text.secondary,
-  height: 60,
   lineHeight: '60px',
 }));
 
