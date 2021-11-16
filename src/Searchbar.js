@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider, styled} from '@mui/material/styles';
+import { Link } from "react-router-dom";
 
 
 
@@ -129,6 +130,9 @@ const SummaryItem = styled(Paper)(({ theme }) => ({
 const Summary = (book) => {
   return(
     <div onClick={() => console.log(book.book.name)}>
+      <Link
+            to={`/summary/${book.book.name}`}
+    key={book.book.name}>
         <Box
           sx={{
             p: 2,
@@ -146,6 +150,7 @@ const Summary = (book) => {
               <p>Click to read the summary!</p>
             </SummaryItem>
         </Box>
+</Link>
   </div>
   );
 }

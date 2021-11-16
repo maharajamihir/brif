@@ -5,6 +5,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import { useParams } from "react-router-dom";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -51,12 +52,14 @@ export default function CustomizedAccordions(props) {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-
+  let { title } = useParams();
+  console.log(title);
+  console.log("Hello World");
   return (
     <div>
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>Collapsible Group Item #1</Typography>
+          <Typography>Chapter #1</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -69,7 +72,7 @@ export default function CustomizedAccordions(props) {
       </Accordion>
       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>Collapsible Group Item #2</Typography>
+          <Typography>Chapter #2</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -82,7 +85,7 @@ export default function CustomizedAccordions(props) {
       </Accordion>
       <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Collapsible Group Item #3</Typography>
+          <Typography>Chapter #3</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
