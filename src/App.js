@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import ControllableStates from './Searchbar'
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CustomizedAccordions from './Summary'
 
 function App() {
