@@ -45,6 +45,7 @@ export default function ControllableStates() {
   const [inputValue, setInputValue] = React.useState('');
   const [bookList, setBookList] = useState(null);
   const [options, setOptions] = useState(null);
+  const [error, setError] = useState("Loading...");
 
   const classes = useStyles();
   const fetchData = (text) => {
@@ -73,15 +74,13 @@ export default function ControllableStates() {
      // .then(res => console.log(JSON.stringify(res[0])))
       .then(list => setOptions(list))
       .then(res => console.log(JSON.stringify(options[0])))
-      .catch(error => console.log(error))
+      .catch(error => setError("An error occured while fetching recources. Please make sure you have a stable internet connection!"))
       .then(l => { return l });
 
   }
 
-  useEffect(() => {
     if(!options)
       getBookNames();
-  });
 
   return (
     <div style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -105,7 +104,7 @@ export default function ControllableStates() {
         options={options}
          sx={{color: '#fff'}}
         renderInput={(params) => <TextField {...params} label="Books" />}
-                 /> : <p>loading...</p>}
+       /> : <p>{error}</p>}
 
       {bookList ?
        <Summary book={bookList}/> :
