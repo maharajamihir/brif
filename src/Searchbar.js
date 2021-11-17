@@ -6,6 +6,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider, styled} from '@mui/material/styles';
 import { Link } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
@@ -102,11 +103,11 @@ export default function ControllableStates() {
         }}
         id="controllable-states-demo"
         options={options}
-         sx={{color: '#fff'}}
+         sx={{color: '#fff', maxWidth: 600}}
         renderInput={(params) => <TextField {...params} label="Books" />}
        /> : <p>{error}</p>}
 
-      {bookList ?
+      {value?
        <Summary book={bookList}/> :
        null
       }
@@ -119,7 +120,7 @@ export default function ControllableStates() {
 }
 
 const SummaryItem = styled(Paper)(({ theme }) => ({
-  width: '100%',
+  width: '50%',
   textAlign: 'center',
   color: theme.palette.text.secondary,
   lineHeight: '60px',
@@ -127,6 +128,13 @@ const SummaryItem = styled(Paper)(({ theme }) => ({
 
 
 const Summary = (book) => {
+  if(!book.book){
+    return (
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <CircularProgress />
+    </Box>
+    );
+  } else{
   return(
     <div onClick={() => console.log(book.book.name)}>
       <Link
@@ -152,6 +160,7 @@ const Summary = (book) => {
 </Link>
   </div>
   );
+  }
 }
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -178,9 +187,13 @@ const Featured = (props) => {
               }}
             >
               {props.availableBooks.map((elevation) => (
-                <Item key={elevation} elevation={24}>
+                <Link
+                  to={`/summary/${elevation}`}
+                  >
+                <Item key={elevation} elevation={10} style={{paddingLeft: 10, paddingRight: 10}} onClick={()=>console.log(elevation)}>
                   {elevation}
                 </Item>
+                </Link>
               ))}
             </Box>
           </ThemeProvider>
