@@ -2,10 +2,12 @@ import './App.css';
 import React from 'react';
 import ControllableStates from './Searchbar'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CustomizedAccordions from './Summary'
+import CustomizedAccordions from './Summary';
+import {SummaryContextProvider} from './book-context';
 
 function App() {
   return (
+    <SummaryContextProvider>
     <Router>
         <div
           className="App">
@@ -23,6 +25,7 @@ function App() {
           </header>
         </div>
     </Router>
+    </SummaryContextProvider>
   );
 }
 

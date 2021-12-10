@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useContext, useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider, styled} from '@mui/material/styles';
 import { Link } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
+import {SummaryContext} from './book-context';
 
 
 
@@ -128,6 +129,7 @@ const SummaryItem = styled(Paper)(({ theme }) => ({
 
 
 const Summary = (book) => {
+  const { fetchBookSummary } = useContext(SummaryContext);
   if(!book.book){
     return (
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -136,7 +138,10 @@ const Summary = (book) => {
     );
   } else{
   return(
-    <div onClick={() => console.log(book.book.name)}>
+    <div onClick={() => {
+      console.log(book.book.name);
+      fetchBookSummary(book.book.name);
+    }}>
       <Link
             to={`/summary/${book.book.name}`}
     key={book.book.name}>
@@ -173,6 +178,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const lightTheme = createTheme({ palette: { mode: 'light' } });
 
 const Featured = (props) => {
+  const { fetchBookSummary } = useContext(SummaryContext);
   return (
     <div>
     <h2>Featured Summaries</h2>
@@ -190,7 +196,11 @@ const Featured = (props) => {
                 <Link
                   to={`/summary/${elevation}`}
                   >
-                <Item key={elevation} elevation={10} style={{paddingLeft: 10, paddingRight: 10}} onClick={()=>console.log(elevation)}>
+                <Item key={elevation} elevation={10} style={{paddingLeft: 10, paddingRight: 10}}
+                      onClick={()=>{
+                        console.log(elevation);
+                        fetchBookSummary(elevation);
+                                   }}>
                   {elevation}
                 </Item>
                 </Link>

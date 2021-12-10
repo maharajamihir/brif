@@ -5,7 +5,8 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import { useParams } from "react-router-dom";
+import { useParams, Navigate} from "react-router-dom";
+import {SummaryContext} from './book-context';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -55,47 +56,40 @@ export default function CustomizedAccordions(props) {
   let { title } = useParams();
   console.log(title);
   console.log("Hello World");
+  const { bookSummary, isLoading } = React.useContext(SummaryContext);
+  if(isLoading){
+    return(<h1>loading...</h1>)
+  }
+  if(bookSummary == null){
+    return <Navigate to={`/`} />
+  }
+  if(bookSummary.sum){
+    return (
+      <div>
+        <h1>{bookSummary.name}</h1>
+        <p>
+          {bookSummary.sum}
+        </p>
+      </div>
+    )
+  }
   return (
     <div>
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+      <h1>{bookSummary.name}</h1>
+      {bookSummary.chaps.map((chapter) => (
+        <Accordion expanded={expanded === chapter.name} onChange={handleChange(chapter.name)}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>Chapter #1</Typography>
+        <Typography>{chapter.name}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
+        {chapter.sum}
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>Chapter #2</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Chapter #3</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-    </div>
+
+
+      ))}
+   </div>
   );
 }
