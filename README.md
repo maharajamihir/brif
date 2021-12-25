@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://brif.netlify.app/">
-    brif
+    brif.
   </a>
 </h1>
 
