@@ -4,11 +4,8 @@
   </a>
 </h1>
 
-# Usage
-~~~
-yarn install
-~~~
-and then 
-~~~
-yarn start
-~~~
+# Preview
+The platform has been hosted [here](brif.netlify.app)
+
+# Model
+The model and the automated summary process can be found [here](github.com/avocadoali/brif-summarizer)
