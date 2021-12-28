@@ -5,12 +5,10 @@
 </h1>
 
 ---
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+https://img.shields.io/github/issues/maharajamihir/brif
+https://img.shields.io/github/forks/maharajamihir/brif
+https://img.shields.io/github/stars/maharajamihir/brif
+https://img.shields.io/github/license/maharajamihir/brif
 
 # Preview
 The platform has been hosted [here](brif.netlify.app)
