@@ -1,4 +1,5 @@
 <div align="center">
+  <img src="https://github.com/maharajamihir/brif/blob/main/screenshot.png" alt="screenshot" />
   <p></p>
   <h1>brif.</h1>
   <p></p>
