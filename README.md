@@ -30,7 +30,6 @@
   </p>
   <br />
 </div>
----
 
 # Preview
 The platform has been hosted [here](brif.netlify.app)
