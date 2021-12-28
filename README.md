@@ -1,11 +1,10 @@
 <div align="center">
-  <img src="https://www.kindpng.com/picc/m/208-2086241_alcohol-alcoholic-drink-drinking-non-beverage-liquid-alcohol.png" alt="BoozeUp" width="400" />
   <p></p>
   <h1>brif.</h1>
   <p></p>
   <sup>
-    <a href="https://github.com/maharajamihir/brif/actions">
-      <img src="https://github.com/maharajamihir/brif/actions/workflows/testing.yml/badge.svg" alt="builds" />
+    <a href="https://app.netlify.com/sites/brif/deploys">
+      <img src="https://api.netlify.com/api/v1/badges/198da5fe-9430-4af6-af0c-3e2f499bda75/deploy-status" alt="builds" />
     </a>
     <a href="/LICENSE">
       <img src="https://img.shields.io/github/license/maharajamihir/brif" alt="license" />
